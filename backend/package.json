@@ -1,0 +1,53 @@
+{
+  "name": "blockudocs",
+  "version": "0.0.1",
+  "description": "Document signing using Blockchain Technology",
+  "main": "backend/index.js",
+  "scripts": {
+    "test": "grunt test",
+    "start": "grunt start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/clout-js-templates/clout-example-angluar2-ts-scss.git"
+  },
+  "keywords": [
+    "clout-js",
+    "blockchain",
+    "angular",
+    "scss",
+    "typescript"
+  ],
+  "author": "Muhammad Dadu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clout-js-templates/clout-example-angluar2-ts-scss/issues"
+  },
+  "modules": [
+    "clout-mongoose"
+  ],
+  "homepage": "https://github.com/clout-js-templates/clout-example-angluar2-ts-scss#readme",
+  "dependencies": {
+    "clout-js": "^1.1.0",
+    "clout-mongoose": "0.0.3",
+    "clout-passport": "0.0.5",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "file-loader": "^0.9.0",
+    "lodash": "^4.17.4",
+    "solc": "^0.4.8",
+    "ts": "0.0.0",
+    "url-loader": "^0.5.7",
+    "web3": "^0.18.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-nodemon": "^0.4.2",
+    "load-grunt-tasks": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
