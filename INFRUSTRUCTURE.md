@@ -27,3 +27,13 @@ sudo chwon -R 777 /var/log/ethereum
 ```
 geth --datadir /etc/breaktheblock/geth/data/ --networkid 20170125 --rpc --rpcaddr 0.0.0.0 2>/var/log/ethereum/geth.log
 ```
+
+## Connecting to the Ropsten Testnet
+```
+geth --testnet
+```
+
+## Managing Screen
+```
+screen -r
+```
