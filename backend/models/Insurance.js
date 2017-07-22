@@ -15,7 +15,7 @@ let Insurance = mongoose.model('Insurance', {
 
 module.exports = Insurance;
 
-Insurance.getForOrganiserAddress = function (address) {
+Insurance.getForAttendieAddress = function (address) {
 	return Insurance.find({ attendieAddress: address });
 };
 

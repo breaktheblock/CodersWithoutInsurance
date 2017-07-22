@@ -37,7 +37,7 @@ module.exports = {
 			let Insurance = req.models.Insurance;
 
 			Insurance
-				.getForOrganiserAddress(organiserAddress)
+				.getForAttendieAddress(organiserAddress)
 				.then((results) => resp.ok(results))
 				.catch((error) => resp.error(error));
 		}
