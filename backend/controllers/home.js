@@ -10,9 +10,6 @@ module.exports = {
 	description: 'Example application',
 	fn (req, resp, next) {
 		let pageName = req.params.pageName || 'home';
-		if (!req.session.user) {
-			pageName = 'login';
-		}
 
 		resp.render(pageName);
 	}

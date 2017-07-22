@@ -10,10 +10,10 @@ module.exports = {
 		secret: '5476rutyfjgho78oiu'
 	},
 	web3: {
-		provider: new Web3.providers.HttpProvider('http://blockchain-rpc.clout.tech'),
+		provider: new Web3.providers.HttpProvider('http://breaktheblock.thisplace.tech:8545'),
 		etherbase: {
-			address: '0xa964e9cb54a844f451c23a6eab20d6d96b7eab0a',
-			password: 'T3st@2017'
+			address: '9b2021b14b8678b04886d26589d6d9378735a20d',
+			password: 'password2'
 		}
 	}
 };

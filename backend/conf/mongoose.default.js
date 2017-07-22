@@ -4,6 +4,6 @@
 
 module.exports = {
     mongoose: {
-        uri: 'mongodb://clout.tech:13382/thischange',
+        uri: 'mongodb://blockchaininsurance:blockchaininsurance@ds115493.mlab.com:15493/blockchaininsurance'
     }
 };
