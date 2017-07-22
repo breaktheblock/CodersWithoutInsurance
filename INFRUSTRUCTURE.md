@@ -33,7 +33,7 @@ geth --datadir /etc/breaktheblock/geth/data/ --networkid 20170125 --rpc --rpcadd
 geth --testnet
 ```
 
-## Managing Screen
+## Managing Screen
 ```
 screen -r
 ```
