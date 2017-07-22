@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sunshine Contract</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body class="body-center-content body-background">
+	<div class="content-area">
+		<div>
+			<h1 class="text-center m-b-16 noSelectText">Welcome to Sunshine Contracts</h1>
+			<h2 class="text-center m-b-16 noSelectText">To create an event please register the fields below</h2>
+		</div>
+		<form action="">
+			<div class="input--container">
+				<div class="input--icon name-icon"></div>
+				<input type="text" name="name" class="input--field js-input-name" placeholder="Event Name" required>
+			</div>
+			<div class="input--container">
+				<div class="input--icon gps-icon"></div>
+				<input type="text" name="location" class="input--field js-input-location" placeholder="Event Location" required>
+			</div>
+			<div class="input--container">
+				<div class="input--icon clock-icon"></div>
+				<input type="text" name="date" class="input--field js-input-date" placeholder="dd/mm/yyyy" required>
+			</div>
+			<div class="input--container m-b-20">
+				<input type="submit" value="Create Event" class="input--field--submit js-submit-organize-form">
+			</div>
+		</form>
+		<div class="events--icon events-icon js-go-to-events"></div>
+	</div>
+
+	<script src="js/scripts.js"></script>
+</body>
+</html>

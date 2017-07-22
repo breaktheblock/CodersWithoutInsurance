@@ -9,7 +9,7 @@ module.exports = {
 	path: '/:pageName?',
 	description: 'Example application',
 	fn (req, resp, next) {
-		let pageName = req.params.pageName || 'home';
+		let pageName = req.params.pageName || 'landingPage';
 
 		resp.render(pageName);
 	}
