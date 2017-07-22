@@ -12,8 +12,8 @@ module.exports = {
 	web3: {
 		provider: new Web3.providers.HttpProvider('http://breaktheblock.thisplace.tech:8545'),
 		etherbase: {
-			address: '9b2021b14b8678b04886d26589d6d9378735a20d',
-			password: 'password2'
+			address: '25b8e885c968dba4d5d0208879d583f60a5e2ded',
+			password: 'password3'
 		}
 	}
 };
