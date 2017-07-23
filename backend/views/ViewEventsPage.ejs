@@ -6,20 +6,24 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
-<body class="body-center-content body-background">
-	<div class="content--container--viewEventsPage">
-		<h2 class="text-center noSelectText">Events Insured</h2>
-		<!-- <ul class="listStyle">
-			<li>
-				<span id="eventName1">eventName1</span>
-			</li>
-			<li>
-				<span id="eventName2">eventName2</span>
-			</li>
-		</ul> -->
-		<div class="emptyList">
-			No events listed
-		</div>
+<body class="body-center-content body-background" ng-app="application">
+	<div class="content--container--viewEventsPage" ng-controller="viewEventsController">
+		<span ng-show="isLoading">
+			<img src="/spinner.gif" width="100%">
+		</span>
+
+		<span ng-show="!isLoading">
+			<h2 class="text-center noSelectText">Events Insured</h2>
+			<ul class="listStyle" ng-hide="events.length === 0">
+				<li ng-repeat="event in events track by $index">
+					<span>{{event.eventLocation}} - {{event.eventLocation}} @ {{event.date | date: "dd/MM/yyyy"}}</span>
+				</li>
+			</ul>
+			<div class="emptyList"
+				 ng-hide="events.length !== 0">
+				No events listed
+			</div>
+		</span>
 	</div>
 
 	<% include partials/footer %>
