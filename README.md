@@ -47,6 +47,7 @@ The blockchain, especially smart contracts are perfect for automatically integra
 - Full Implementation of the sensor network
 - Triggering the SMS automatically through the blockchain
 - We are currently having issues getting reliable information from the Raspberry Pi sensors - we may have to trigger the SMS manually
+- Contract payout function
 
 ## Possible Expansion
 
