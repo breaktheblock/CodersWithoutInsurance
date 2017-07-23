@@ -62,7 +62,7 @@
 		var name = $('.js-input-name').val();
 		var location = $('.js-input-location').val();
 		var number = $('.js-input-number').val(); 
-		var date = $('.js-input-date').val(); // convert to timestamp (only needed)
+		var date = $('.js-input-date').val();
 		var date_ts = new Date(date).getTime() / 1000;
 
 		if (name && location && number && date) {
