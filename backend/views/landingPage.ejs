@@ -4,7 +4,16 @@
 	<title>Sunshine Contract</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$( function() {
+			$('.js-input-date').datepicker({
+			  dateFormat: "yy-mm-dd"
+			});
+		} );
+	</script>
 </head>
 <body class="body-center-content body-background">
 	<div class="content-area">
@@ -27,13 +36,13 @@
 			</div>
 			<div class="input--container">
 				<div class="input--icon clock-icon"></div>
-				<input type="text" name="date" class="input--field js-input-date" placeholder="dd/mm/yyyy" required>
+				<input type="date" name="date" class="input--field js-input-date" placeholder="dd/mm/yyyy" required>
 			</div>
 			<div class="input--container m-b-20">
 				<input type="submit" value="Create Event" class="input--field--submit js-submit-organize-form">
 			</div>
 		</form>
-		<div class="events--icon events-icon"></div>
+		<div class="events--icon events-icon display-none"></div>
 	</div>
 
 	<script src="js/scripts.js"></script>
