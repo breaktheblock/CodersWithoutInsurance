@@ -12,8 +12,8 @@
 			<img src="/spinner.gif" width="100%">
 		</span>
 		<span ng-show="event.organizerHash">
-			<img ng-if="event.location" src="http://maps.google.com/maps/api/staticmap?center={{event.location}}&zoom=13&markers=color:blue|{{event.location}}&size=500x200&sensor=true&key=AIzaSyBvKxaf5KrCql_-ul8-2XZQYwteuUeWe0Y" width="100%" />
-			<div class="content--description text-16 noSelectText">
+			<img ng-if="event.location" src="http://maps.google.com/maps/api/staticmap?center={{event.location}}&zoom=13&markers=color:blue|{{event.location}}&size=500x200&sensor=true&key=AIzaSyBvKxaf5KrCql_-ul8-2XZQYwteuUeWe0Y" width="100%" class="m-t-16"/>
+			<div class="content--description m-t-16 text-16 noSelectText">
 				You are attending <span id="eventName">{{event.name}}</span> at <span id="eventLocation">{{event.location}}</span> happening at <span id="eventDate">{{event.date | date : "dd/MM/yyyy"}}</span>.
 			</div>
 			<div class="content--description text-16 noSelectText">

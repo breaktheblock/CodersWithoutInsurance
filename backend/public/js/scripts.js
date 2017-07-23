@@ -131,6 +131,9 @@
 	app.controller('createInsuranceController', function ($scope, WeatherAPI) {
 		var contractHash = window.location.href.split('?contract=')[1].replace('#', '');
 		var rainProbability = 0.2;
+		var locationAux = '';
+		var dateAux = 0;
+		var etherProbToken = 1;
 
 		$scope.event = {};
 		$scope.etherPrice = 1;
@@ -154,31 +157,53 @@
 			Contract.at(contractHash).location(function (err, location) {
 				if (err) { return console.log(err); }
 				$scope.event.location = location;
+				locationAux = location;
 				$scope.$apply();
+
+				$scope.updateRainProbability();
 			});
 			Contract.at(contractHash).date(function (err, date) {
 				if (err) { return console.log(err); }
 				$scope.event.date = new Date(date * 1000);
+				dateAux = date * 1000;
 				$scope.$apply();
 
-				WeatherAPI
-					.get('london', (date * 1000))
-					.then(function (_data) {
-						var data = _data.data.data;
-						console.log(data);
-						if (data.success) { console.log('ok');
-							$scope.updateConvertedValue();
-						}
-					});
+				$scope.updateRainProbability();
 			});
 		}, timeoutForWeb3);
 		
 
 		$scope.updateConvertedValue = function () {
 			
-			var prizeEther = parseFloat($scope.etherPrice) + parseFloat($scope.etherPrice) * rainProbability;
-			$scope.etherPrize = prizeEther;
+			if (etherProbToken > 0) {
+				var prizeEther = parseFloat($scope.etherPrice) + etherProbToken * rainProbability;
+				$scope.etherPrize = prizeEther;
+			} else {
+				$scope.etherPrize = 0;
+			}
 		};
+
+		$scope.updateRainProbability = function () {
+			if (locationAux !== '' && dateAux !== 0) {
+				WeatherAPI
+					.get(locationAux, dateAux)
+					.then(function (_data) {
+						var data = _data.data.data;
+						var strData = JSON.stringify(data).split('rain:');
+						var probability = strData[1]
+											.trim()
+											.split(' ')[0]
+											.slice(0, -1);
+						probability = 1 - (probability / 100);
+
+						etherProbToken = Math.ceil(((dateAux - Date.now()) / 1000) / 60 / 60 / 24);
+
+						if (data.success) {
+							$scope.updateConvertedValue();
+						}
+					});
+			}
+		}
 	});
 
 	function buyInsuranceUser() {
