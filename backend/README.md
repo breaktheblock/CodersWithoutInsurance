@@ -4,6 +4,12 @@
 ### Prerequisites
 Checkout the documentation for [grunt-contrib-sass](https://github.com/gruntjs/grunt-contrib-sass) as it explains the prerequisites required to use the module.
 
+Install ruby
+-brew install ruby
+
+Install sass
+-gem install sass
+
 Ensure geth is installed.
 
 Then, install the modules for this project.
