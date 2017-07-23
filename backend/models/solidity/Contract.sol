@@ -32,10 +32,14 @@ contract SunshineContract is usingOraclize {
 
     function __callback(string myid, string result) {
         require(msg.sender != oraclize_cbAddress());
+        // on reciept, if rain is found in result,
+        // the insurances will get released by insurances[0].send(insurances[0].payout)
         
     }
 
     function oricalizeCheck() private {
+        // this would be delayed until the day of the demo
+        // it would run this query every 1 hour
         oraclize_query("WolframAlpha", strConcat("will it rain in ", location, " on timestamp ", date));
     }
 
@@ -48,9 +52,10 @@ contract SunshineContract is usingOraclize {
         uint _payout
     ) payable {
         // ensure the payout in relation to payour is within a 5% error margin
+        // msg.sender should be the same value as _price
         insurances[msg.sender] = Insurance(
             _price,
-            _payout,
+            _payout, // this contains the amount of money to be paid out
             false,
             false
         );
