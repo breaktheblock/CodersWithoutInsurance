@@ -11,15 +11,15 @@ contract SunshineContract is usingOraclize {
     }
 
     address organizer;
-    bytes32 eventName;
-    bytes32 phoneNumber;
+    string eventName;
+    string phoneNumber;
     string location;
     string date;
     mapping(address=>Insurance) insurances;
 
     function SunshineContract(
-        bytes32 _eventName,
-        bytes32 _phoneNumber,
+        string _eventName,
+        string _phoneNumber,
         string _location,
         string _date
     ) {
@@ -30,7 +30,7 @@ contract SunshineContract is usingOraclize {
         date = _date;
     }
 
-    function __callback(bytes32 myid, string result) {
+    function __callback(string myid, string result) {
         require(msg.sender != oraclize_cbAddress());
         
     }
