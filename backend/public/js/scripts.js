@@ -212,12 +212,20 @@
 					.then(function (_data) {
 						var data = _data.data.data;
 						var strData = JSON.stringify(data).split('rain:');
-						var probability = strData[1]
+						var probability = strData[1];
+
+						if (probability) {
+							probability = probability
 											.trim()
 											.split(' ')[0]
 											.slice(0, -1);
-						probability = 1 - (probability / 100);
 
+							probability = 1 - (probability / 100);
+						} else {
+							probability = 0.2;
+						}
+
+						rainProbability = probability;
 						etherProbToken = Math.ceil(((dateAux - Date.now()) / 1000) / 60 / 60 / 24);
 
 						if (data.success) {
