@@ -224,20 +224,19 @@
 				Contract.at(contractHash).buyContract($scope.etherPrice, $scope.etherPrize, {
 					value: web3.toWei(parseInt($scope.etherPrice), 'ether'),
 					from: currentAccount
-				}, function (err, contractInfo) {
+				}, function (err, address) {
 					if (err) { $scope.isLoading = false; $scope.$apply(); return console.error(err); }
-					console.log(contractInfo);
 
-					if (contractInfo.address) {
+					if (address) {
 						InsuranceModel
 							.create({
 								attendieAddress: currentAccount,
-								contractAddress: contractInfo.address,
+								contractAddress: address,
 								pricePaid: $scope.etherPrice,
 								pricePayout: $scope.etherPrize
 							})
 							.then(function () {
-								window.location.href = '/UserConfirmationPage?hash=' + contractInfo.address;
+								window.location.href = '/UserConfirmationPage?hash=' + address;
 							})
 							.catch(function (err) {
 								$scope.isLoading = false;
