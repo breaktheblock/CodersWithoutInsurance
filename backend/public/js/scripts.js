@@ -122,6 +122,28 @@
 		}
 	});
 
+	app.controller('viewEventsController', function ($scope, ContractModel) {
+		$scope.events = [];
+		$scope.isLoading = true;
+
+		setTimeout(function () {
+			var currentAccount = web3.eth.accounts[0];
+
+			ContractModel
+				.list(currentAccount)
+				.then(function (_data) {
+					var events = _data.data.data;
+					$scope.events = events;
+					for (var i = 0, l = events.length; i < l; ++i) {
+						$scope.events[i].date = new Date($scope.events[i].date * 1000);
+					}
+ 				})
+ 				.finally(function () {
+					$scope.isLoading = false;
+ 				});
+		}, timeoutForWeb3);
+	});
+
 	app.controller('shareController', function ($scope) {
 		var parts = window.location.href.split('/');
 		var contractHash = window.location.href.split('?contract=')[1].replace('#', '');
