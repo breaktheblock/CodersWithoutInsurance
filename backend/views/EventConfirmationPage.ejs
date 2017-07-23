@@ -6,11 +6,11 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
-<body class="body-center-content body-background">
-	<div class="content--container--EventConfirmationPage">
+<body class="body-center-content body-background" ng-app="application">
+	<div class="content--container--EventConfirmationPage" ng-controller="shareController">
 		<div class="label--link noSelectText">Shareable Link:</div>
-		<a href="#" id="shareLink" class="shareLink--style js-share-link">
-			tinylink.example
+		<a ng-href="{{shareLink}}" id="shareLink" class="shareLink--style">
+			{{shareLink}}
 		</a>
 	</div>
 

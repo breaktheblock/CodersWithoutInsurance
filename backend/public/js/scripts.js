@@ -1,4 +1,5 @@
 (function (global) {
+	var timeoutForWeb3 = 1000;
 	var app = angular.module('application', []);
 
 	// Models
@@ -52,6 +53,14 @@
 	                url: '/api/v1/user/' + address,
 	                data: data
 	            });
+			}
+		}
+	});
+
+	app.factory('WeatherAPI', function ($http) {
+		return {
+			get: function (location, date) {
+				return $http.get('/api/v1/weather?location=' + location + '&date=' + date);
 			}
 		}
 	});
@@ -113,6 +122,56 @@
 		}
 	});
 
+	app.controller('shareController', function ($scope) {
+		console.log($scope);
+		let parts = window.location.href.split('/');
+		let contractHash = window.location.href.split('?contract=')[1].replace('#', '');
+		$scope.shareLink =  'http://' + parts[2] + '/UserContractPage?contract=' + contractHash;
+	});
+
+	app.controller('createInsuranceController', function ($scope, WeatherAPI) {
+		let contractHash = window.location.href.split('?contract=')[1].replace('#', '');
+
+		$scope.event = {};
+
+		setTimeout(function () {
+			Contract.at(contractHash).organizer(function (err, organizerHash) {
+				if (err) { return console.log(err); }
+				$scope.event.organizerHash = organizerHash;
+				$scope.$apply();
+			});
+			Contract.at(contractHash).eventName(function (err, name) {
+				if (err) { return console.log(err); }
+				$scope.event.name = name;
+				$scope.$apply();
+			});
+			Contract.at(contractHash).phoneNumber(function (err, number) {
+				if (err) { return console.log(err); }
+				$scope.event.number = number;
+				$scope.$apply();
+			});
+			Contract.at(contractHash).location(function (err, location) {
+				if (err) { return console.log(err); }
+				$scope.event.location = location;
+				$scope.$apply();
+			});
+			Contract.at(contractHash).date(function (err, date) {
+				if (err) { return console.log(err); }
+				$scope.event.date = new Date(date * 1000);
+				$scope.$apply();
+			});
+		}, timeoutForWeb3);
+
+		// WeatherAPI
+		// 	.get('london', Date.now())
+		// 	.then(function (data) {
+		// 		console.log(data);
+		// 		if (data.success) {
+
+		// 		}
+		// 	});
+	});
+
 	function buyInsuranceUser() {
 		return true;
 	}
@@ -127,30 +186,6 @@
 		var priceEther = parseFloat(ether) + parseFloat(ether) * getRainProbability();
 
 		$('.js-input-number-user-inflated').val(priceEther);
-	}
-	
-	function populateShareLink() {
-		if ($('.js-share-link').length) {
-			var path = window.location.href;
-			var realPath;
-			var pathParts = path.split('/');
-
-			if (pathParts.length > 1) {
-				realPath = '';
-
-				for(var i = 0 ; i < pathParts.length - 1 ; i++) {
-					realPath += pathParts[i] + '/';
-				}
-
-				realPath += 'UserContractPage';
-			} else {
-				realPath = path + 'UserContractPage';
-			}
-
-			$('.js-share-link')
-				.attr('href', realPath)
-				.text(realPath);
-		}
 	}
 
 	$('.js-input-number-user').bind('keyup', function () {
@@ -181,9 +216,9 @@
 		}
 	});
 
-	populateShareLink();
 	if ($('.js-input-number-user').length) {
 		updateConvertedValue($('.js-input-number-user').val());
+
 	}
 
 	setTimeout(function () {
@@ -198,6 +233,6 @@
 		if (web3) {
 			global.Contract = web3.eth.contract(JSON.parse(global.abi));
 		}
-
-	}, 1000);
+		timeoutForWeb3 = 0;
+	}, timeoutForWeb3);
 }(window));

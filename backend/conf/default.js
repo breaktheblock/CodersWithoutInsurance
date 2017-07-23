@@ -19,5 +19,8 @@ module.exports = {
 	sendsmsapi: {
 		// http://139.59.191.247/experiments/breaktheblock/claimprocess/twilio/send_sms.php?receiver_nr=+447515396849
 		// replace the number at the end with recipient number
+	},
+	wolframAlpha: {
+		appId: 'K9L5JR-QQLXG7XWWX'
 	}
 };
