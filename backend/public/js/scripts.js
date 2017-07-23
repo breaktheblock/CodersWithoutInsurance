@@ -117,4 +117,14 @@
 		updateConvertedValue($('.js-input-number-user').val());
 	}
 
+	if (typeof web3 !== 'undefined') {
+		// contract stuff
+		global.abi = global.compiledContract.interface;
+		global.bytecode = '0x' + global.compiledContract.bytecode;
+		if (web3) {
+			global.gasEstimate = web3.eth.estimateGas({data: global.bytecode});
+			global.Contract = web3.eth.contract(JSON.parse(global.abi));
+		}
+	}
+
 }(window));

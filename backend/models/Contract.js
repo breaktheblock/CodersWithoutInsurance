@@ -4,6 +4,19 @@
 const clout = require('clout-js');
 const mongoose = clout.mongoose;
 
+const web3 = clout.module.web3;
+const fs = require('fs');
+const path = require('path');
+const solc = require('solc');
+
+let contractSource = fs.readFileSync(path.join(__dirname, `solidity/Contract.sol`), 'utf8');
+let contractCompiled = solc.compile({
+	sources: {
+		'Contract.sol': contractSource,
+		'github.com/oraclize/ethereum-api/oraclizeAPI.sol': fs.readFileSync(path.join(__dirname, `solidity/oracalizeAPI.sol`), 'utf8')
+	}
+}, 1).contracts['Contract.sol:SunshineContract'];
+
 const REQUIRED_PARAMS = ['organiserAddress', 'contractAddress', 'eventName', 'eventLocation', 'date']
 
 let Contract = mongoose.model('Contract', {
@@ -15,6 +28,7 @@ let Contract = mongoose.model('Contract', {
 });
 
 module.exports = Contract;
+Contract.contractCompiled = contractCompiled;
 
 Contract.getForOrganiserAddress = function (address) {
 	return Contract.find({ organiserAddress: address }).exec();
