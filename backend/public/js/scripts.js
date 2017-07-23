@@ -15,12 +15,6 @@
 
 		$('.js-input-number-user-inflated').val(priceEther);
 	}
-
-	function populateDate() {
-		if ($('.js-input-date').length) {
-			$('.js-input-date').val('26th of July');
-		}
-	}
 	
 	function populateShareLink() {
 		if ($('.js-share-link').length) {
@@ -69,6 +63,7 @@
 		var location = $('.js-input-location').val();
 		var number = $('.js-input-number').val(); 
 		var date = $('.js-input-date').val(); // convert to timestamp (only needed)
+		var date_ts = new Date(date).getTime() / 1000;
 
 		if (name && location && number && date) {
 			nextStep = true;
@@ -111,7 +106,6 @@
 		}
 	});
 
-	populateDate();
 	populateShareLink();
 	if ($('.js-input-number-user').length) {
 		updateConvertedValue($('.js-input-number-user').val());
