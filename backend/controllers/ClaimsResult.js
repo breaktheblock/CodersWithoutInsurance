@@ -11,12 +11,6 @@ module.exports = {
 	fn (req, resp, next) {
 		let pageName = req.params.pageName || 'landingPage';
 
-		resp.render(pageName, {
-			location: { 
-				longitude: req.query.longitude, 
-				latitude: req.query.latitude
-			}
-		});
+		resp.render(pageName);
 	}
-	
 };

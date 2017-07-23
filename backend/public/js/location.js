@@ -9,7 +9,7 @@ function locate(){
     var success = function(p) {
         position = p;
         setTimeout(function(){
-            var href = 'share' +
+            var href = 'ClaimsResult' +
                        '?accuracy=' + position.coords.accuracy +
                        '&longitude=' + position.coords.longitude +
                        '&latitude=' + position.coords.latitude;
