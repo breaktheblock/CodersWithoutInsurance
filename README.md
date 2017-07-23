@@ -2,13 +2,15 @@
 
 ## Insure your Event
 
-Problem statement: There is an inherent dependency between the success of an outdoor event such a music festival, sports event or any outdoor event that generates business and the financial loss that can incur if the weather is poor.
+Problem statement: 
 
-Our insurance allows organiser of such events to offload the insurance premium of such losses to the attendees of such events so they can decide if they want to buy insurance for it or not.
+Insurance companies are commonly assoicated with being untrustworthy and are facing high administration costs and significant levels of fraud. Smart contracts are an incredibly powerful and adaptable way of ensuring all parties within the contract execute if all the parameters are met. When brought together, we believe there is a massive opportunity to reduce processing times, reduce administration costs, prevent fraud and increase customer satisfaction. Below we've got one application of our idea, however there is a huge number of areas and applications that our hack can be applied to. 
 
-The flow is that a event organiser creates an event on our DAPP, which will create a contract. This contract can be sent to the attendees and they can insure it against the weather. A  query to a weather forecast API (Wolfram Alpha) and how much the event is in the future determines the premium and the payout (if it rains).
+There is an inherent dependency between the success of an outdoor event such a music festival, sports event or any outdoor event that generates business and the financial loss that can incur if the weather is poor.
 
-If there is any impact of the rain (e.g. the festival/concert gets cancelled) a sensor network of Raspberry Pis along side with further Weather API queries will trigger a sms message to the insured people. The message contains a link which opens the claim process page on their phone. Part of the claim process includes that the user's mobile browser detects the location and depending if the location and time is correct the funds will be released to the originator.
+The flow is that a event organiser creates an event on our DAPP, which will create a contract. This contract can be sent to the attendees and they can insure it against the weather. A query to a weather forecast API (Wolfram Alpha) and how much the event is in the future determines the premium and the payout (if it rains).
+
+If there is any impact of the rain (e.g. the festival/concert gets cancelled) a sensor network of Raspberry Pis along side with further Weather API queries will trigger a sms message to the insured people. The message contains a link which opens the claim process page on their phone. Part of the claim process requires that the user's mobile browser detects the location and depending if the location and time is correct the funds will be released to the originator.
 
 With this Mobile site process we can ensure that the attendees were actually at the event (or intended to go to the event) and we can mitigate the risk that people would insure evens they never intended to attend. The insured de facto have to "go and pick up their insurance claim at a the location they originally intended to go.
 
@@ -48,7 +50,11 @@ The blockchain, especially smart contracts are perfect for automatically integra
 
 ## Possible Expansion
 
-- this concept can be used as a template to insure anyting that can be triggered by API data and where there is a central organiser that want to distribute the insurance risk amongst the attendees (and offload the risk cover to them).
+- this concept can be used as a template to insure anything that can be triggered by API data and where there is a central organiser that want to distribute the insurance risk amongst the attendees (and offload the risk cover to them).
+
+- future iterations could also use Foreign Office Travel Advice API to aid the detect acts of terrorism at events abroad.
+
+- Various other IoT devices will allow contract triggers, for example early earthquake detectors (RASPBERRY SHAKE – YOUR PERSONAL SEISMOGRAPH) will allow a variety of triggers e.g. financial compensation to use for evacuation. 
 
 ## Application
 Documentation for the Angular Application can be found [here](./application/README.md).
