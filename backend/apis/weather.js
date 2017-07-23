@@ -17,7 +17,7 @@ module.exports = {
 			let location = req.query.location;
 			let time = req.query.date;
 			let uri = 'http://api.wolframalpha.com/v2/query?output=JSON&appid=' + clout.config.wolframAlpha.appId + '&input=' + encodeURIComponent(`will it rain in ${location} on timestamp ${time}`);
-			console.log(uri);
+
 			request({
 				uri,
 				json: true

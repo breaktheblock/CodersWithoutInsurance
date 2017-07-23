@@ -38,6 +38,10 @@ Contract.getForAddress = function (address) {
 	return Contract.find({ contractAddress: address }).exec();
 };
 
+Contract.getAll = function () {
+	return Contract.find({}).exec();
+}
+
 Contract.create = function (params) {
 	let missingParams;
 
