@@ -150,7 +150,12 @@
 		$scope.shareLink =  'http://' + parts[2] + '/UserContractPage?contract=' + contractHash;
 	});
 
-	app.controller('createInsuranceController', function ($scope, WeatherAPI) {
+	app.controller('userConfirmationPage', function ($scope) {
+		$scope.hash = window.location.href.split('?hash=')[1].replace('#', '');
+	});
+		
+
+	app.controller('createInsuranceController', function ($scope, WeatherAPI, InsuranceModel) {
 		var contractHash = window.location.href.split('?contract=')[1].replace('#', '');
 		var rainProbability = 0.2;
 		var locationAux = '';
@@ -196,13 +201,52 @@
 		
 
 		$scope.updateConvertedValue = function () {
-			
 			if (etherProbToken > 0) {
 				var prizeEther = parseFloat($scope.etherPrice) + etherProbToken * rainProbability;
 				$scope.etherPrize = prizeEther;
 			} else {
 				$scope.etherPrize = 0;
 			}
+		};
+
+		$scope.createContract = function () {
+			var currentAccount = web3.eth.accounts[0];
+
+			$scope.isLoading = true;
+			web3.eth.estimateGas({data: bytecode}, function (err, gasEstimate) {
+				var newInsuranceMetadata = {
+					from: currentAccount,
+					data: bytecode,
+					gas: gasEstimate * 2,
+					gasPrice: 30
+				};
+
+				Contract.at(contractHash).buyContract($scope.etherPrice, $scope.etherPrize, {
+					value: web3.toWei(parseInt($scope.etherPrice), 'ether'),
+					from: currentAccount
+				}, function (err, contractInfo) {
+					if (err) { $scope.isLoading = false; $scope.$apply(); return console.error(err); }
+					console.log(contractInfo);
+
+					if (contractInfo.address) {
+						InsuranceModel
+							.create({
+								attendieAddress: currentAccount,
+								contractAddress: contractInfo.address,
+								pricePaid: $scope.etherPrice,
+								pricePayout: $scope.etherPrize
+							})
+							.then(function () {
+								window.location.href = '/UserConfirmationPage?hash=' + contractInfo.address;
+							})
+							.catch(function (err) {
+								$scope.isLoading = false;
+								$scope.$apply();
+								console.error(err);
+							});
+					}
+				});
+			});
 		};
 
 		$scope.updateRainProbability = function () {
@@ -231,30 +275,6 @@
 	function buyInsuranceUser() {
 		return true;
 	}
-
-	$('.js-submit-button-buy-insurance').click(function () {
-		var nextStep = buyInsuranceUser();
-
-		if (nextStep) {
-			var path = window.location.href;
-			var realPath;
-			var pathParts = path.split('/');
-
-			if (pathParts.length > 1) {
-				realPath = '';
-
-				for(var i = 0 ; i < pathParts.length - 1 ; i++) {
-					realPath += pathParts[i] + '/';
-				}
-
-				realPath += 'UserConfirmationPage';
-			} else {
-				realPath = path + 'UserConfirmationPage';
-			}
-
-			window.location.href = realPath;
-		}
-	});
 
 	setTimeout(function () {
 		console.log('initialized contracts');

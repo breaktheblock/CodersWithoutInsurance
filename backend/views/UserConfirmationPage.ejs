@@ -6,13 +6,13 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
-<body class="body-center-content body-background">
-	<div class="content--container--thankYouMessage">
+<body class="body-center-content body-background" ng-app="application">
+	<div class="content--container--thankYouMessage" ng-controller="userConfirmationPage">
 		<div class="content--container--firstMessage noSelectText">
 			Thank you for registering!
 		</div>
 		<div class="content--container--secondMessage">
-			Your contract is <span id="contractID">0x0F3E2B805DD942353A52E9DD22D0078a168697c2</span>.
+			Your contract is <a href="https://ropsten.etherscan.io/address/{{hash}}" id="contractID">{{hash}}</a>.
 		</div>
 	</div>
 

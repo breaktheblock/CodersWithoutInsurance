@@ -8,10 +8,10 @@
 </head>
 <body class="body-center-content body-background" ng-app="application">
 	<div class="content--container--UserContractPage" ng-controller="createInsuranceController">
-		<span ng-show="!event.organizerHash">
+		<span ng-show="!event.organizerHash || isLoading">
 			<img src="/spinner.gif" width="100%">
 		</span>
-		<span ng-show="event.organizerHash">
+		<form ng-show="event.organizerHash && !isLoading" ng-submit="etherPrize && createContract()">
 			<img ng-if="event.location" src="http://maps.google.com/maps/api/staticmap?center={{event.location}}&zoom=13&markers=color:blue|{{event.location}}&size=500x200&sensor=true&key=AIzaSyBvKxaf5KrCql_-ul8-2XZQYwteuUeWe0Y" width="100%" class="m-t-16"/>
 			<div class="content--description m-t-16 text-16 noSelectText">
 				You are attending <span id="eventName">{{event.name}}</span> at <span id="eventLocation">{{event.location}}</span> happening at <span id="eventDate">{{event.date | date : "dd/MM/yyyy"}}</span>.
@@ -25,7 +25,7 @@
 			<div class="content--description">
 				<input type="submit" value="Register for Insurance" class="input--field--submit js-submit-button-buy-insurance">
 			</div>
-		</span>
+		</form>
 	</div>
 
 	<% include partials/footer %>
