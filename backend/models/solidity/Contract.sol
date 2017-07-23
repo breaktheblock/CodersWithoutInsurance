@@ -10,12 +10,12 @@ contract SunshineContract is usingOraclize {
         bool isLocationVerified;
     }
 
-    address organizer;
-    string eventName;
-    string phoneNumber;
-    string location;
-    string date;
-    mapping(address=>Insurance) insurances;
+    address public organizer;
+    string public eventName;
+    string public phoneNumber;
+    string public location;
+    string public date;
+    mapping(address=>Insurance) public insurances;
 
     function SunshineContract(
         string _eventName,

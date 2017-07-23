@@ -29,7 +29,7 @@ module.exports = {
 				});
 		}
 	},
-	listForOrganiser: {
+	list: {
 		path: '/v1/user/:organiserAddress/insurance',
 		method: 'get',
 		fn: function (req, resp, next) {
