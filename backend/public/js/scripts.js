@@ -100,7 +100,7 @@
 								date: date
 							})
 							.then(function () {
-								window.location.href = '/EventConfirmationPage';
+								window.location.href = '/EventConfirmationPage?contract=' + contractInfo.address;
 							})
 							.catch(function (err) {
 								$scope.isLoading = false;
