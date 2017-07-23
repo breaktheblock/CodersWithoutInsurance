@@ -77,9 +77,9 @@
 		$scope.isLoading = false;
 
 		$scope.submitForm = function () {
-			let eventData = $scope.event;
-			let date = String(parseInt(new Date(eventData.date).getTime() / 1000), 10);
-			let currentAccount = web3.eth.accounts[0];
+			var eventData = $scope.event;
+			var date = String(parseInt(new Date(eventData.date).getTime() / 1000), 10);
+			var currentAccount = web3.eth.accounts[0];
 
 			$scope.isLoading = true;
 
@@ -123,16 +123,17 @@
 	});
 
 	app.controller('shareController', function ($scope) {
-		console.log($scope);
-		let parts = window.location.href.split('/');
-		let contractHash = window.location.href.split('?contract=')[1].replace('#', '');
+		var parts = window.location.href.split('/');
+		var contractHash = window.location.href.split('?contract=')[1].replace('#', '');
 		$scope.shareLink =  'http://' + parts[2] + '/UserContractPage?contract=' + contractHash;
 	});
 
 	app.controller('createInsuranceController', function ($scope, WeatherAPI) {
-		let contractHash = window.location.href.split('?contract=')[1].replace('#', '');
+		var contractHash = window.location.href.split('?contract=')[1].replace('#', '');
+		var rainProbability = 0.2;
 
 		$scope.event = {};
+		$scope.etherPrice = 1;
 
 		setTimeout(function () {
 			Contract.at(contractHash).organizer(function (err, organizerHash) {
@@ -159,38 +160,30 @@
 				if (err) { return console.log(err); }
 				$scope.event.date = new Date(date * 1000);
 				$scope.$apply();
+
+				WeatherAPI
+					.get('london', (date * 1000))
+					.then(function (_data) {
+						var data = _data.data.data;
+						console.log(data);
+						if (data.success) { console.log('ok');
+							$scope.updateConvertedValue();
+						}
+					});
 			});
 		}, timeoutForWeb3);
+		
 
-		// WeatherAPI
-		// 	.get('london', Date.now())
-		// 	.then(function (data) {
-		// 		console.log(data);
-		// 		if (data.success) {
-
-		// 		}
-		// 	});
+		$scope.updateConvertedValue = function () {
+			
+			var prizeEther = parseFloat($scope.etherPrice) + parseFloat($scope.etherPrice) * rainProbability;
+			$scope.etherPrize = prizeEther;
+		};
 	});
 
 	function buyInsuranceUser() {
 		return true;
 	}
-
-	function getRainProbability() {
-		var rainProbability = 0.2;
-		// connect to weather api
-		return rainProbability;
-	}
-
-	function updateConvertedValue(ether) {
-		var priceEther = parseFloat(ether) + parseFloat(ether) * getRainProbability();
-
-		$('.js-input-number-user-inflated').val(priceEther);
-	}
-
-	$('.js-input-number-user').bind('keyup', function () {
-		updateConvertedValue($(this).val());
-	});
 
 	$('.js-submit-button-buy-insurance').click(function () {
 		var nextStep = buyInsuranceUser();
@@ -215,11 +208,6 @@
 			window.location.href = realPath;
 		}
 	});
-
-	if ($('.js-input-number-user').length) {
-		updateConvertedValue($('.js-input-number-user').val());
-
-	}
 
 	setTimeout(function () {
 		console.log('initialized contracts');
